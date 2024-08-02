@@ -10,9 +10,9 @@
 		113DE52D2C44100400A864E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113DE52C2C44100400A864E8 /* AppDelegate.swift */; };
 		113DE52F2C44100400A864E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113DE52E2C44100400A864E8 /* SceneDelegate.swift */; };
 		113DE5312C44100400A864E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113DE5302C44100400A864E8 /* ViewController.swift */; };
-		113DE5342C44100400A864E8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 113DE5332C44100400A864E8 /* Base */; };
 		113DE5362C44100600A864E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 113DE5352C44100600A864E8 /* Assets.xcassets */; };
 		113DE5392C44100600A864E8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 113DE5382C44100600A864E8 /* Base */; };
+		11A9152C2C58904F0059F60C /* NewsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9152B2C58904F0059F60C /* NewsRowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +20,10 @@
 		113DE52C2C44100400A864E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		113DE52E2C44100400A864E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		113DE5302C44100400A864E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		113DE5332C44100400A864E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		113DE5352C44100600A864E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		113DE5382C44100600A864E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		113DE53A2C44100600A864E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11A9152B2C58904F0059F60C /* NewsRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,31 @@
 		113DE52B2C44100400A864E8 /* SportNews */ = {
 			isa = PBXGroup;
 			children = (
+				11A9152A2C588F4C0059F60C /* NewsRow */,
+				116889552C5877B3001AF9E2 /* Files */,
 				113DE52C2C44100400A864E8 /* AppDelegate.swift */,
 				113DE52E2C44100400A864E8 /* SceneDelegate.swift */,
 				113DE5302C44100400A864E8 /* ViewController.swift */,
-				113DE5322C44100400A864E8 /* Main.storyboard */,
-				113DE5352C44100600A864E8 /* Assets.xcassets */,
-				113DE5372C44100600A864E8 /* LaunchScreen.storyboard */,
 				113DE53A2C44100600A864E8 /* Info.plist */,
 			);
 			path = SportNews;
+			sourceTree = "<group>";
+		};
+		116889552C5877B3001AF9E2 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				113DE5352C44100600A864E8 /* Assets.xcassets */,
+				113DE5372C44100600A864E8 /* LaunchScreen.storyboard */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		11A9152A2C588F4C0059F60C /* NewsRow */ = {
+			isa = PBXGroup;
+			children = (
+				11A9152B2C58904F0059F60C /* NewsRowController.swift */,
+			);
+			path = NewsRow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +143,6 @@
 			files = (
 				113DE5362C44100600A864E8 /* Assets.xcassets in Resources */,
 				113DE5392C44100600A864E8 /* Base in Resources */,
-				113DE5342C44100400A864E8 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,20 +156,13 @@
 				113DE5312C44100400A864E8 /* ViewController.swift in Sources */,
 				113DE52D2C44100400A864E8 /* AppDelegate.swift in Sources */,
 				113DE52F2C44100400A864E8 /* SceneDelegate.swift in Sources */,
+				11A9152C2C58904F0059F60C /* NewsRowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		113DE5322C44100400A864E8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				113DE5332C44100400A864E8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		113DE5372C44100600A864E8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,7 +305,6 @@
 				INFOPLIST_FILE = SportNews/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,7 +332,6 @@
 				INFOPLIST_FILE = SportNews/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
