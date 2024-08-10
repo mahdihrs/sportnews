@@ -1,0 +1,4 @@
+build/
+DerivedData/
+Pods/
+Variables.swift

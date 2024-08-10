@@ -12,6 +12,8 @@
 		113DE5312C44100400A864E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113DE5302C44100400A864E8 /* ViewController.swift */; };
 		113DE5362C44100600A864E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 113DE5352C44100600A864E8 /* Assets.xcassets */; };
 		113DE5392C44100600A864E8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 113DE5382C44100600A864E8 /* Base */; };
+		114497FA2C5E523A009A63F3 /* ViewController+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114497F92C5E523A009A63F3 /* ViewController+Networking.swift */; };
+		1150EAC92C67102E0061A9F3 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1150EAC82C67102E0061A9F3 /* Variables.swift */; };
 		11A9152C2C58904F0059F60C /* NewsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9152B2C58904F0059F60C /* NewsRowController.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 		113DE5352C44100600A864E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		113DE5382C44100600A864E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		113DE53A2C44100600A864E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		114497F92C5E523A009A63F3 /* ViewController+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Networking.swift"; sourceTree = "<group>"; };
+		1150EAC82C67102E0061A9F3 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		11A9152B2C58904F0059F60C /* NewsRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,14 +60,24 @@
 		113DE52B2C44100400A864E8 /* SportNews */ = {
 			isa = PBXGroup;
 			children = (
-				11A9152A2C588F4C0059F60C /* NewsRow */,
+				114497F72C5E5212009A63F3 /* NewsController */,
 				116889552C5877B3001AF9E2 /* Files */,
+				11A9152A2C588F4C0059F60C /* NewsRow */,
 				113DE52C2C44100400A864E8 /* AppDelegate.swift */,
 				113DE52E2C44100400A864E8 /* SceneDelegate.swift */,
 				113DE5302C44100400A864E8 /* ViewController.swift */,
+				114497F92C5E523A009A63F3 /* ViewController+Networking.swift */,
 				113DE53A2C44100600A864E8 /* Info.plist */,
+				1150EAC82C67102E0061A9F3 /* Variables.swift */,
 			);
 			path = SportNews;
+			sourceTree = "<group>";
+		};
+		114497F72C5E5212009A63F3 /* NewsController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NewsController;
 			sourceTree = "<group>";
 		};
 		116889552C5877B3001AF9E2 /* Files */ = {
@@ -154,7 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				113DE5312C44100400A864E8 /* ViewController.swift in Sources */,
+				114497FA2C5E523A009A63F3 /* ViewController+Networking.swift in Sources */,
 				113DE52D2C44100400A864E8 /* AppDelegate.swift in Sources */,
+				1150EAC92C67102E0061A9F3 /* Variables.swift in Sources */,
 				113DE52F2C44100400A864E8 /* SceneDelegate.swift in Sources */,
 				11A9152C2C58904F0059F60C /* NewsRowController.swift in Sources */,
 			);

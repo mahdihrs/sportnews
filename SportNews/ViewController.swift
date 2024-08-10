@@ -25,22 +25,38 @@ class ViewController: UIViewController, UITableViewDelegate {
     let previewText = UILabel()
     
     var newsRowViewModel: [NewsRowCell.ViewModel] = []
-    let newsList: [News] = newsDummy
+    var newsList: [News] = []
     let tableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("controller called")
         view.backgroundColor = .systemBackground
-        self.configureTableCells(with: self.newsList)
-        setupTableView()
+        getNews(group: DispatchGroup())
+    }
+    
+    private func getNews(group: DispatchGroup) {
+        group.enter()
+        fetchNews() { result in
+            switch result {
+            case .success(let newsFetched):
+                print(newsFetched, "News List")
+                self.newsList = newsFetched
+                self.setupTableView()
+                self.configureTableCells(with: newsFetched)
+            case .failure(let error):
+                print(error, "Error GetNews")
+//                self.displayError(error)
+            }
+            group.leave()
+        }
     }
     
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsRowCell.self, forCellReuseIdentifier: NewsRowCell.reuseID)
-        tableView.rowHeight = 80
+        tableView.rowHeight = .maximum(280, 300)
         tableView.tableFooterView = UIView()
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +66,8 @@ class ViewController: UIViewController, UITableViewDelegate {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 120)
         ])
     }
     

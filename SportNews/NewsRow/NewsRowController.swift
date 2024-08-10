@@ -55,21 +55,21 @@ class NewsRowCell: UITableViewCell {
 
     private func setup() {
         thumbnail.translatesAutoresizingMaskIntoConstraints = false
-        thumbnail.layer.cornerRadius = 12
+        thumbnail.layer.cornerRadius = 8
         thumbnail.contentMode = .scaleAspectFill
         thumbnail.clipsToBounds = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = titleLabel.text
         titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        titleLabel.textColor = UIColor.systemGray
-        titleLabel.numberOfLines = 2
+//        titleLabel.textColor = UIColor.systemGray
+        titleLabel.numberOfLines = 3
         
         previewText.translatesAutoresizingMaskIntoConstraints = false
         previewText.text = previewText.text
-        previewText.numberOfLines = 3
+        previewText.numberOfLines = 4
         previewText.font = UIFont.preferredFont(forTextStyle: .footnote)
-        previewText.textColor = UIColor.systemGray2
+        previewText.textColor = UIColor.systemGray
     }
     
     private func layout() {
@@ -79,34 +79,34 @@ class NewsRowCell: UITableViewCell {
         
         // thumbnail
         NSLayoutConstraint.activate([
-            thumbnail.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            thumbnail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            thumbnail.widthAnchor.constraint(equalToConstant: 50),
-            thumbnail.heightAnchor.constraint(equalToConstant: 50),
+            thumbnail.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            thumbnail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            thumbnail.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            thumbnail.heightAnchor.constraint(equalToConstant: 160)
         ])
         
         // titleLabel
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            titleLabel.leadingAnchor.constraint(equalTo: thumbnail.trailingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: thumbnail.bottomAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
         ])
         
         // previewText
         NSLayoutConstraint.activate([
-            previewText.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            previewText.leadingAnchor.constraint(equalTo: thumbnail.trailingAnchor, constant: 8),
-            previewText.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+            previewText.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            previewText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            previewText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            previewText.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
 }
 
 extension NewsRowCell {
     func configure(with vm: ViewModel) {
-//        print(vm, "vm")
+        print(vm, "vm")
         titleLabel.text = vm.title
         previewText.text = vm.text
         self.loadImage(from: vm.image)
-//        thumbnail.image = self.loadImage(from: vm.image)
     }
 }
