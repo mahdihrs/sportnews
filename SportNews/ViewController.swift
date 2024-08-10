@@ -13,13 +13,6 @@ struct News {
     let image: String
 }
 
-let newsDummy: [News] = [
-    News(title: "NFL Rankings Teams 1 through 6", text: "Harrison Butker makes a 35 yard field goal and trade season is coming through", image: "https://images.seattletimes.com/wp-content/uploads/2023/11/11232023_Kraken_211222.jpg"),
-    News(title: "NHL Pipeline Rankings Teams 1 through 6", text: "Harrison Butker makes a 35 yard field goal and trade season is coming through", image: "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2024/08/1294/728/jordan-love.jpg"),
-    News(title: "NFL Rankings Teams 1 through 6", text: "Harrison Butker makes a 35 yard field goal and trade season is coming through", image: "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2024/08/1294/728/5b59a782-jalen-hurts-16x9-1.jpg"),
-    News(title: "NBA Rankings Teams 1 through 6", text: "Harrison Butker makes a 35 yard field goal and trade season is coming through", image: "https://e0.365dm.com/22/12/2048x1152/skysports-jae-crowder-nba-phoenix-suns_5995073.jpg"),
-]
-
 class ViewController: UIViewController, UITableViewDelegate {
     let titleLabel = UILabel()
     let previewText = UILabel()
@@ -40,7 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         fetchNews() { result in
             switch result {
             case .success(let newsFetched):
-                print(newsFetched, "News List")
+//                print(newsFetched, "News List")
                 self.newsList = newsFetched
                 self.setupTableView()
                 self.configureTableCells(with: newsFetched)
@@ -56,7 +49,8 @@ class ViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsRowCell.self, forCellReuseIdentifier: NewsRowCell.reuseID)
-        tableView.rowHeight = .maximum(280, 300)
+//        tableView.rowHeight = .maximum(280, 300)
+        tableView.rowHeight = 300
         tableView.tableFooterView = UIView()
         
         tableView.translatesAutoresizingMaskIntoConstraints = false

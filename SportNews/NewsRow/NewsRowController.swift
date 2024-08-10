@@ -12,6 +12,8 @@ class NewsRowCell: UITableViewCell {
     let titleLabel = UILabel()
     let previewText = UILabel()
     var thumbnail = UIImageView()
+    let imagePlaceholder = UIView()
+    let placeholderText = UILabel()
     
     static let reuseID = "NewsRowCell"
     
@@ -24,8 +26,6 @@ class NewsRowCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         print("Cell Called")
-        setup()
-        layout()
     }
     
     required init?(coder: NSCoder) {
@@ -55,9 +55,9 @@ class NewsRowCell: UITableViewCell {
 
     private func setup() {
         thumbnail.translatesAutoresizingMaskIntoConstraints = false
-        thumbnail.layer.cornerRadius = 8
+//        thumbnail.layer.cornerRadius = 8
         thumbnail.contentMode = .scaleAspectFill
-        thumbnail.clipsToBounds = true
+//        thumbnail.clipsToBounds = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = titleLabel.text
@@ -70,24 +70,49 @@ class NewsRowCell: UITableViewCell {
         previewText.numberOfLines = 4
         previewText.font = UIFont.preferredFont(forTextStyle: .footnote)
         previewText.textColor = UIColor.systemGray
+        
+        imagePlaceholder.translatesAutoresizingMaskIntoConstraints = false
+        imagePlaceholder.backgroundColor = .systemGray
+        
+        placeholderText.translatesAutoresizingMaskIntoConstraints = false
+        placeholderText.text = "Preview Image Unavailable"
+        placeholderText.textAlignment = .center
     }
     
-    private func layout() {
-        contentView.addSubview(thumbnail)
+    private func layout(showImage: Bool) {
+        if (showImage) {
+            contentView.addSubview(thumbnail)
+            // thumbnail
+            NSLayoutConstraint.activate([
+                thumbnail.topAnchor.constraint(equalTo: topAnchor),
+                thumbnail.leadingAnchor.constraint(equalTo: leadingAnchor),
+                thumbnail.trailingAnchor.constraint(equalTo: trailingAnchor),
+                thumbnail.heightAnchor.constraint(equalToConstant: 180)
+            ])
+        } else {
+            contentView.addSubview(imagePlaceholder)
+            contentView.addSubview(placeholderText)
+            // image placeholder
+            NSLayoutConstraint.activate([
+                imagePlaceholder.topAnchor.constraint(equalTo: topAnchor),
+                imagePlaceholder.leadingAnchor.constraint(equalTo: leadingAnchor),
+                imagePlaceholder.trailingAnchor.constraint(equalTo: trailingAnchor),
+                imagePlaceholder.heightAnchor.constraint(equalToConstant: 180),
+                imagePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
+            ])
+            NSLayoutConstraint.activate([
+                placeholderText.widthAnchor.constraint(equalTo: widthAnchor),
+                placeholderText.topAnchor.constraint(equalTo: imagePlaceholder.centerYAnchor)
+            ])
+        }
+        
         contentView.addSubview(titleLabel)
         contentView.addSubview(previewText)
-        
-        // thumbnail
-        NSLayoutConstraint.activate([
-            thumbnail.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            thumbnail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            thumbnail.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            thumbnail.heightAnchor.constraint(equalToConstant: 160)
-        ])
-        
+    
+        let imageElement = showImage ? thumbnail : imagePlaceholder
         // titleLabel
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: thumbnail.bottomAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: imageElement.bottomAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
         ])
@@ -104,9 +129,15 @@ class NewsRowCell: UITableViewCell {
 
 extension NewsRowCell {
     func configure(with vm: ViewModel) {
-        print(vm, "vm")
+//        print(vm.image, "vm", vm.title)
+        setup()
+        if vm.image.isEmpty {
+            layout(showImage: false)
+        } else {
+            self.loadImage(from: vm.image)
+            layout(showImage: true)
+        }
         titleLabel.text = vm.title
         previewText.text = vm.text
-        self.loadImage(from: vm.image)
     }
 }

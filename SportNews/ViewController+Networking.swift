@@ -38,7 +38,7 @@ enum NetworkError: Error {
 
 extension ViewController {
     func fetchNews(completion: @escaping (Result<[News],NetworkError>) -> Void) {
-        let url = URL(string: "https://newsapi.org/v2/everything?apiKey=\(Variables.newsKey)&pageSize=10&q=indonesia")!
+        let url = URL(string: "https://newsapi.org/v2/everything?apiKey=\(Variables.newsKey)&pageSize=10&q=olympics")!
 
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
@@ -61,7 +61,6 @@ extension ViewController {
                     }
                     completion(.success(news))
                 } catch {
-                    print("HEre Errorrr")
                     completion(.failure(.decodingError))
                 }
             }
