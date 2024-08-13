@@ -14,8 +14,7 @@ struct News {
 }
 
 class ViewController: UIViewController, UITableViewDelegate {
-    let titleLabel = UILabel()
-    let previewText = UILabel()
+    let searchInput = NewsSearchInput()
     
     var newsRowViewModel: [NewsRowCell.ViewModel] = []
     var newsList: [News] = []
@@ -24,13 +23,26 @@ class ViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("controller called")
+        searchInput.delegate = self
         view.backgroundColor = .systemBackground
-        getNews(group: DispatchGroup())
+        getNews(group: DispatchGroup(), q: "")
+        layout()
     }
     
-    private func getNews(group: DispatchGroup) {
+    private func layout() {
+        view.addSubview(searchInput)
+        searchInput.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchInput.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchInput.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            searchInput.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            searchInput.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    private func getNews(group: DispatchGroup, q: String?) {
         group.enter()
-        fetchNews() { result in
+        fetchNews(query: q ?? "") { result in
             switch result {
             case .success(let newsFetched):
 //                print(newsFetched, "News List")
@@ -49,19 +61,17 @@ class ViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsRowCell.self, forCellReuseIdentifier: NewsRowCell.reuseID)
-//        tableView.rowHeight = .maximum(280, 300)
-        tableView.rowHeight = 300
-        tableView.tableFooterView = UIView()
+        tableView.rowHeight = .maximum(300, 350)
+//        tableView.tableFooterView = UIView()
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 120)
         ])
     }
     
@@ -75,6 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard !newsRowViewModel.isEmpty else { return UITableViewCell() }
+        print(indexPath.row, "<<<<<")
         let row = newsRowViewModel[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsRowCell.reuseID, for: indexPath) as! NewsRowCell
@@ -89,5 +100,11 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension ViewController: SearchInputDelegate {
+    @objc func searchQuery(q: String) {
+        getNews(group: DispatchGroup(), q: q)
     }
 }

@@ -13,7 +13,6 @@ struct Source: Codable {
     let name: String
 }
 
-// Define the Article struct
 struct Article: Codable {
     let source: Source
     let author: String
@@ -37,8 +36,11 @@ enum NetworkError: Error {
 }
 
 extension ViewController {
-    func fetchNews(completion: @escaping (Result<[News],NetworkError>) -> Void) {
-        let url = URL(string: "https://newsapi.org/v2/everything?apiKey=\(Variables.newsKey)&pageSize=10&q=olympics")!
+    func fetchNews(query: String?, completion: @escaping (Result<[News],NetworkError>) -> Void) {
+        var queryToUse = "indonesia"
+        if let q = query, !q.isEmpty { queryToUse = q }
+        let urlString = "?apiKey=\(Variables.newsKey)&pageSize=10&domains=npr.org&q=\(queryToUse)"
+        let url = URL(string: "https://newsapi.org/v2/everything\(urlString)")!
 
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
@@ -49,6 +51,13 @@ extension ViewController {
                 }
 
                 do {
+//                    if let jsonString = String(data: data, encoding: .utf8) {
+//                        // Log or print jsonString to verify the JSON data
+//                        print(jsonString)
+//                    } else {
+//                        print("Failed to decode data to a UTF-8 string")
+//                    }
+
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .iso8601
                     
